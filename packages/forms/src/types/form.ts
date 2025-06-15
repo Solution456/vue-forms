@@ -14,6 +14,15 @@ export type FormConfig = {
   validateOnModelUpdate?: boolean
 }
 
+export type FormFieldRegisterItem = {
+  errors: string[]
+  dirty: boolean
+  touched: boolean
+  label?: string
+  validationSchema?: any // TODO
+  validationInProgress?: boolean // TODO
+}
+
 export type FormContextType<TState extends object = Data> = {
   initialState: ShallowRef<TState>
   currentState: TState
@@ -23,9 +32,10 @@ export type FormContextType<TState extends object = Data> = {
     submitError: ComputedRef<string | undefined>
     pending: ComputedRef<boolean>
   }
-  dirty: Record<string, boolean>
-  touched: Record<string, boolean>
-  errors: Record<string, string>
+  fieldRegister: Record<string, FormFieldRegisterItem>
+  // dirty: Record<string, boolean>
+  // touched: Record<string, boolean>
+  // errors: Record<string, string>
   config: FormConfig
   pathContext?: PathContext
   submit: () => Promise<boolean>

@@ -36,10 +36,16 @@ export function createFieldContext<TValue = unknown>(
   const key = computed(() => toValue(keyValue))
   const errors = ref<string[]>([])
   const touched = ref(false)
-  const dirty = ref(false)
 
   const formContext = getRootFormContext(context)
-  const path = computed(() => getPathFromContext(context, key.value))
+  const path = computed(() => {
+    try {
+      return getPathFromContext(context, key.value)
+    } catch (error) {
+      console.error(error)
+      return ''
+    }
+  })
 
   if (!formContext) {
     throw new Error(
@@ -59,6 +65,7 @@ export function createFieldContext<TValue = unknown>(
   const errorMessage = computed(() => errors.value[0])
 
   const valid = computed(() => !!errors.value.length)
+  const dirty = computed(() => formContext.fieldRegister[path.value]?.dirty)
 
   return {
     path,

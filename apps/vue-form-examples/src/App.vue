@@ -24,6 +24,7 @@ form.onSubmit((values) => {
           v-model="ctx.value.value"
           type="text"
         />
+        <pre>{{ ctx }}</pre>
       </FieldProvider>
       <FieldProvider
         v-slot="{ ctx }"
@@ -50,7 +51,7 @@ form.onSubmit((values) => {
       <button @click="form.resetForm">resetForm</button>
     </div>
     <div>
-      <pre>{{ form.currentState }}</pre>
+      <pre>{{ form }}</pre>
     </div>
   </main>
 </template>

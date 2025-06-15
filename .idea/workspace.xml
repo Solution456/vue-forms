@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="edcffd15-ca77-446d-878d-9d5243b33e82" name="Changes" comment="feat: form implementation" />
+    <list default="true" id="edcffd15-ca77-446d-878d-9d5243b33e82" name="Changes" comment="feat: test app" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,19 +33,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -64,6 +64,7 @@
       <workItem from="1749968870467" duration="5000" />
       <workItem from="1749969145700" duration="156000" />
       <workItem from="1749974401988" duration="1369000" />
+      <workItem from="1749986817825" duration="798000" />
     </task>
     <task id="LOCAL-00001" summary="feat: useFormState">
       <option name="closed" value="true" />
@@ -81,7 +82,31 @@
       <option name="project" value="LOCAL" />
       <updated>1749984354405</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: test app">
+      <option name="closed" value="true" />
+      <created>1749986897387</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1749986897387</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: test app">
+      <option name="closed" value="true" />
+      <created>1749986900957</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1749986900957</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: test app">
+      <option name="closed" value="true" />
+      <created>1749987029633</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1749987029633</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -92,6 +117,7 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="feat: useFormState" />
     <MESSAGE value="feat: form implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: form implementation" />
+    <MESSAGE value="feat: test app" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: test app" />
   </component>
 </project>

@@ -47,12 +47,12 @@ export function createFormContext<
 >(): FormContextType<TState> {
   const initialState = shallowRef({}) as ShallowRef<TState>
   const currentState = reactive({}) as ShallowReactive<TState>
-  const dirty = reactive<Record<string, boolean>>({})
-  const touched = reactive<Record<string, boolean>>({})
-  const errors = reactive<Record<string, string>>({})
+  // const dirty = reactive<Record<string, boolean>>({})
+  // const touched = reactive<Record<string, boolean>>({})
+  // const errors = reactive<Record<string, string>>({})
   const pending = ref(false)
 
-  const submitError = computed(() => errors['@submitForm']?.[0])
+  const submitError = ref<string | undefined>(undefined)
 
   let submitImpl: FormSubmitImpl<TState> | undefined = undefined
   const onSubmit = (cb: FormSubmitImpl<TState>) => {
@@ -74,9 +74,9 @@ export function createFormContext<
     if (submitImpl) {
       try {
         await submitImpl(currentState)
-        delete errors['@submitForm']
+        submitError.value = undefined
       } catch (error) {
-        errors['@submitForm'] = [error.message]
+        submitError.value = String(error)
         hasErrors = true
       }
     }
@@ -97,35 +97,35 @@ export function createFormContext<
     pending: computed(() => pending.value),
     submitError,
     dirty: computed(() => {
-      for (const value of Object.values(dirty)) {
-        if (value) return true
+      for (const field of Object.values(fieldRegister)) {
+        if (field.dirty) return true
       }
 
       return false
     }),
 
     valid: computed(() => {
-      for (const value of Object.values(errors)) {
-        if (value) return false
+      for (const field of Object.values(fieldRegister)) {
+        if (field.errors.length) return false
       }
 
       return true
     })
   }
 
-  const setFieldValue = (path: string, value: unknown) => {
-    setInPath(currentState, path, value)
+  const setFieldValue = (path: string, newValue: unknown) => {
+    setInPath(currentState, path, newValue)
 
     const oldValue = getFromPath(initialState.value as any, path)
 
-    const isDirty = oldValue !== value
+    const field = fieldRegister[path]
 
-    if (isDirty) {
-      dirty[path] = isDirty
-    } else {
-      delete dirty[path]
+    if (field) {
+      field.dirty = newValue !== oldValue
     }
   }
+
+  const fieldRegister: FormContextType<TState>['fieldRegister'] = reactive({})
 
   const getFieldValue = <TValue = unknown>(path: string): TValue => {
     return getFromPath(currentState, path) as TValue
@@ -133,9 +133,12 @@ export function createFormContext<
 
   const resetForm = () => {
     cleanObject(currentState)
-    cleanObject(errors)
-    cleanObject(dirty)
-    cleanObject(touched)
+
+    for (const field of Object.values(fieldRegister)) {
+      field.errors = []
+      field.dirty = false
+      field.touched = false
+    }
 
     Object.assign(currentState, deepClone(initialState.value))
   }
@@ -151,9 +154,7 @@ export function createFormContext<
   }
 
   const destroyField = (path: string) => {
-    delete errors[path]
-    delete dirty[path]
-    delete touched[path]
+    delete fieldRegister[path]
 
     setFieldValue(path, undefined)
   }
@@ -161,10 +162,8 @@ export function createFormContext<
   return {
     initialState,
     currentState,
+    fieldRegister,
     meta,
-    dirty,
-    touched,
-    errors,
     pathContext: undefined,
     config,
     submit,
