@@ -1,0 +1,9 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+catalog:
+  "@sxzz/eslint-config": ^7.0.2
+  eslint-plugin-simple-import-sort: ^12.1.1
+  prettier: ^3.5.3
+  turbo: ^2.5.4
+  typescript: 5.8.2

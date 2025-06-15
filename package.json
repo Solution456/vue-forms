@@ -1,0 +1,23 @@
+{
+  "name": "vue-forms",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "@sxzz/eslint-config": "catalog:",
+    "eslint-plugin-simple-import-sort": "catalog:",
+    "prettier": "catalog:",
+    "turbo": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
