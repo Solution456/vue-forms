@@ -1,30 +1,28 @@
 {
   "name": "@repo/forms",
   "version": "0.0.1",
-  "license": "MIT",
   "type": "module",
   "keywords": [],
+  "license": "MIT",
   "repository": {},
+  "main": "./src/index.ts",
+  "types": "./src/types/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
   "scripts": {
     "test": "echo todo",
     "test:watch": "vitest watch --typecheck"
   },
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
+  "dependencies": {
+    "es-toolkit": "catalog:"
   },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "devDependencies": {
-    "@vitejs/plugin-vue-jsx": "^4.1.0",
-    "@vue/tsconfig": "^0.6.0",
-    "tsx": "^4.19.2",
-    "vue": "3.5.13"
-  },
-  "dependencies": {}
+    "@vitejs/plugin-vue-jsx": "catalog:",
+    "@vue/tsconfig": "catalog:conflicts_@vue/tsconfig_h0_6_0",
+    "tsx": "catalog:",
+    "vue": "catalog:conflicts_vue_3_5_13"
+  }
 }

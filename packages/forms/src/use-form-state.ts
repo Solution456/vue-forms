@@ -1,6 +1,5 @@
 import {
   computed,
-  inject,
   type InjectionKey,
   provide,
   reactive,
@@ -11,6 +10,7 @@ import {
 } from 'vue'
 
 import { getFromPath, setInPath } from './helpers/path'
+import { injectWithSelf } from './utils/common'
 import { cleanObject, deepClone } from './utils/object'
 import type { Data, FormConfig, FormContextType, FormSubmitImpl } from './types'
 
@@ -22,7 +22,7 @@ export function provideFormContext(contextValue: any) {
 }
 
 export function injectFormContext() {
-  const context = inject(formInjectKey)
+  const context = injectWithSelf(formInjectKey)
 
   if (context !== null) return context as FormContextType
 
@@ -61,7 +61,6 @@ export function createFormContext<
 
   const submit = async () => {
     if (pending.value) return false
-
     const isValid = await validateForm()
 
     pending.value = true
@@ -143,7 +142,7 @@ export function createFormContext<
 
   // TODO
   const validateForm = async () => {
-    return false
+    return true
   }
 
   const setInitialState = (state: TState) => {

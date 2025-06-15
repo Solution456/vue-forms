@@ -1,9 +1,32 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - 'apps/*'
+  - 'packages/*'
 catalog:
-  "@sxzz/eslint-config": ^7.0.2
+  '@sxzz/eslint-config': ^7.0.2
+  '@tsconfig/node22': ^22.0.1
+  '@types/node': ^22.14.0
+  '@vitejs/plugin-vue': ^5.2.3
+  '@vitejs/plugin-vue-jsx': ^4.1.0
+  '@vue/tsconfig': ^0.7.0
+  es-toolkit: ^1.39.3
   eslint-plugin-simple-import-sort: ^12.1.1
+  npm-run-all2: ^7.0.2
   prettier: ^3.5.3
+  tsx: ^4.19.2
   turbo: ^2.5.4
   typescript: 5.8.2
+  vite: ^6.2.4
+  vite-plugin-vue-devtools: ^7.7.2
+  vue: ^3.5.13
+  vue-tsc: ^2.2.8
+catalogs:
+  conflicts_@vue/tsconfig_h0_6_0:
+    '@vue/tsconfig': ^0.6.0
+  conflicts_conflicts_@vue/tsconfig_h0_6_0_h0_7_0:
+    '@vue/tsconfig': ^0.7.0
+  conflicts_conflicts_vue_3_5_13_h3_5_13:
+    vue: ^3.5.13
+  conflicts_typescript_t5_8_0:
+    typescript: ~5.8.0
+  conflicts_vue_3_5_13:
+    vue: 3.5.13

@@ -19,8 +19,5 @@
   },
   "engines": {
     "node": ">=18"
-  },
-  "dependencies": {
-    "es-toolkit": "^1.39.3"
   }
 }

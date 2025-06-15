@@ -1,6 +1,5 @@
 import {
   computed,
-  inject,
   type InjectionKey,
   type MaybeRefOrGetter,
   provide,
@@ -11,6 +10,7 @@ import {
 import { getPathFromContext } from './helpers/get-path-from-context'
 import { getRootFormContext } from './helpers/get-root-form-context'
 import { setInPath } from './helpers/path'
+import { injectWithSelf } from './utils/common'
 import type { FieldContextType, PathContext } from './types'
 
 const fieldInjectKey: InjectionKey<FieldContextType> = Symbol('FormField')
@@ -22,7 +22,7 @@ export function provideFieldContext(context: FieldContextType) {
 }
 
 export function injectFieldContext() {
-  const context = inject(fieldInjectKey)
+  const context = injectWithSelf(fieldInjectKey)
 
   if (context !== null) return context as FieldContextType
 
