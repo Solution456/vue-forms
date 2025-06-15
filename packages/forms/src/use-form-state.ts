@@ -1,45 +1,37 @@
 import {
+  computed,
   inject,
   type InjectionKey,
   provide,
   reactive,
-  type Ref,
   ref,
   type ShallowReactive,
   type ShallowRef,
   shallowRef
 } from 'vue'
 
-import type { FormField } from './types/field'
-import type { Data } from './types'
+import { getFromPath, setInPath } from './helpers/path'
+import { cleanObject, deepClone } from './utils/object'
+import type { Data, FormConfig, FormContextType, FormSubmitImpl } from './types'
 
-export type FormContext<TState extends object = Data> = {
-  initialState: ShallowRef<TState>
-  currentState: TState
-  dirty: Ref<boolean>
-  valid: Ref<boolean>
-  fieldsMap: Map<string, FormField>
-  errorsMap: Map<string, string[]>
-}
+const formInjectKey: InjectionKey<FormContextType | null> = Symbol('formState')
 
-const formInjectKey: InjectionKey<FormContext | null> = Symbol('formState')
-
-function provideFormContext(contextValue: any) {
+export function provideFormContext(contextValue: any) {
   provide(formInjectKey, contextValue)
-  return contextValue as FormContext
+  return contextValue as FormContextType
 }
 
-function injectFormContext() {
+export function injectFormContext() {
   const context = inject(formInjectKey)
 
-  if (context !== null) return context
+  if (context !== null) return context as FormContextType
 
   throw new Error('No form context found')
 }
 
 export function useFormState<
   TState extends object = Data
->(): FormContext<TState> {
+>(): FormContextType<TState> {
   let context = injectFormContext()
 
   if (!context) {
@@ -47,32 +39,142 @@ export function useFormState<
     provideFormContext(context)
   }
 
-  return context as FormContext<TState>
+  return context as FormContextType<TState>
 }
 
 export function createFormContext<
-  TState extends object
->(): FormContext<TState> {
-  const context: FormContext<TState> = {
-    initialState: shallowRef({}) as ShallowRef<TState>,
-    currentState: reactive({}) as ShallowReactive<TState>,
-    dirty: ref(false),
-    valid: ref(false),
-    fieldsMap: reactive(new Map()),
-    errorsMap: reactive(new Map())
+  TState extends object = Data
+>(): FormContextType<TState> {
+  const initialState = shallowRef({}) as ShallowRef<TState>
+  const currentState = reactive({}) as ShallowReactive<TState>
+  const dirty = reactive<Record<string, boolean>>({})
+  const touched = reactive<Record<string, boolean>>({})
+  const errors = reactive<Record<string, string>>({})
+  const pending = ref(false)
+
+  const submitError = computed(() => errors['@submitForm']?.[0])
+
+  let submitImpl: FormSubmitImpl<TState> | undefined = undefined
+  const onSubmit = (cb: FormSubmitImpl<TState>) => {
+    submitImpl = cb
   }
 
-  return context
-}
+  const submit = async () => {
+    if (pending.value) return false
 
-export function createFormField<TValue = unknown>(
-  key: string
-): FormField<TValue> {
+    const isValid = await validateForm()
+
+    pending.value = true
+
+    if (!isValid) {
+      pending.value = false
+      return false
+    }
+    let hasErrors = false
+
+    if (submitImpl) {
+      try {
+        await submitImpl(currentState)
+        delete errors['@submitForm']
+      } catch (error) {
+        errors['@submitForm'] = [error.message]
+        hasErrors = true
+      }
+    }
+
+    pending.value = false
+
+    return !hasErrors
+  }
+
+  const config: FormConfig = {
+    validateOnChange: true,
+    validateOnBlur: true,
+    validateOnInput: true,
+    validateOnModelUpdate: true
+  }
+
+  const meta: FormContextType<TState>['meta'] = {
+    pending: computed(() => pending.value),
+    submitError,
+    dirty: computed(() => {
+      for (const value of Object.values(dirty)) {
+        if (value) return true
+      }
+
+      return false
+    }),
+
+    valid: computed(() => {
+      for (const value of Object.values(errors)) {
+        if (value) return false
+      }
+
+      return true
+    })
+  }
+
+  const setFieldValue = (path: string, value: unknown) => {
+    setInPath(currentState, path, value)
+
+    const oldValue = getFromPath(initialState.value as any, path)
+
+    const isDirty = oldValue !== value
+
+    if (isDirty) {
+      dirty[path] = isDirty
+    } else {
+      delete dirty[path]
+    }
+  }
+
+  const getFieldValue = <TValue = unknown>(path: string): TValue => {
+    return getFromPath(currentState, path) as TValue
+  }
+
+  const resetForm = () => {
+    cleanObject(currentState)
+    cleanObject(errors)
+    cleanObject(dirty)
+    cleanObject(touched)
+
+    Object.assign(currentState, deepClone(initialState.value))
+  }
+
+  // TODO
+  const validateForm = async () => {
+    return false
+  }
+
+  const setInitialState = (state: TState) => {
+    initialState.value = state
+    resetForm()
+  }
+
+  const destroyField = (path: string) => {
+    delete errors[path]
+    delete dirty[path]
+    delete touched[path]
+
+    setFieldValue(path, undefined)
+  }
+
   return {
-    key,
-    value: ref(undefined),
-    valid: ref(false),
-    dirty: ref(false),
-    errors: ref([])
+    initialState,
+    currentState,
+    meta,
+    dirty,
+    touched,
+    errors,
+    pathContext: undefined,
+    config,
+    submit,
+    onSubmit,
+    setFieldValue,
+    getFieldValue,
+    setInitialState,
+    resetForm,
+    validateForm,
+    destroyField
   }
 }

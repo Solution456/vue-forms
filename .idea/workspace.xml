@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="edcffd15-ca77-446d-878d-9d5243b33e82" name="Changes" comment="" />
+    <list default="true" id="edcffd15-ca77-446d-878d-9d5243b33e82" name="Changes" comment="feat: useFormState">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/forms/src/types/field.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/forms/src/types/field.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/forms/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/forms/src/types/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/forms/src/use-form-state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/packages/forms/src/use-form-state.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,18 +18,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Solution456"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Solution456&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Solution456/vue-forms.git",
-    "accountId": "768acdc2-4963-4379-9a13-7dbc03f0f091"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Solution456/vue-forms.git&quot;,
+    &quot;accountId&quot;: &quot;768acdc2-4963-4379-9a13-7dbc03f0f091&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -35,6 +43,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -56,10 +68,26 @@
       <updated>1749968869459</updated>
       <workItem from="1749968870467" duration="5000" />
       <workItem from="1749969145700" duration="156000" />
+      <workItem from="1749974401988" duration="716000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: useFormState">
+      <option name="closed" value="true" />
+      <created>1749974490320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749974490320</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="feat: useFormState" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: useFormState" />
   </component>
 </project>
