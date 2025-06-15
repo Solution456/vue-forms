@@ -46,12 +46,8 @@ form.onSubmit((values) => {
     </FormProvider>
 
     <div>
-      <button
-        type="submit"
-        @click="form.submit"
-      >
-        Submit
-      </button>
+      <button @click="form.submit">Submit</button>
+      <button @click="form.resetForm">resetForm</button>
     </div>
     <div>
       <pre>{{ form.currentState }}</pre>
