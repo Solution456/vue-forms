@@ -1,0 +1,28 @@
+{
+  "name": "vue-form-examples",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "run-p type-check \"build-only {@}\" --",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "type-check": "vue-tsc --build"
+  },
+  "dependencies": {
+    "@repo/forms": "workspace:*",
+    "vue": "catalog:conflicts_conflicts_vue_3_5_13_h3_5_13"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "catalog:",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:conflicts_conflicts_@vue/tsconfig_h0_6_0_h0_7_0",
+    "npm-run-all2": "catalog:",
+    "typescript": "catalog:conflicts_typescript_t5_8_0",
+    "vite": "catalog:",
+    "vite-plugin-vue-devtools": "catalog:",
+    "vue-tsc": "catalog:"
+  }
+}
